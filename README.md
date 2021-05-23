@@ -5,9 +5,12 @@ base controller sketches for a 2WD robot using Ros using encoders, dc motor.
 
 ## How to run
 
+> first upload the sketch on your development board (esp32/ Arduino mega), do hardware connections
+
 > please type "sudo dmesg | grep tty " to find the comm port number of your board.
 
 > please run "rosrun rosserial_python serial_node.py /dev/ttyUSB1 "  in one terminal.
+
 > please run  " rosrun teleop_twist_keyboard teleop_twist_keyboard.py "  in another terminal to view wheels spinning.
 
 
