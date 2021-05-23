@@ -1,5 +1,7 @@
-# J_robot
-Arduino code for 2WD robot using ros using encoder, dc motor.
+# 2WD_ros_robot
+This code used here are from " NOX a House wandeing robot  (https://create.arduino.cc/projecthub/robinb/nox-a-house-wandering-robot-ros-652315) " and have been updated to move without adafrit shield
+
+base controller sketches for 2WD robot using Ros using encoder, dc motor.
 
 ## How to run
 
