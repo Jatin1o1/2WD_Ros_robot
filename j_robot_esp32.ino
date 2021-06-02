@@ -29,16 +29,15 @@ const int right_pwm_bwd = 18;
 const int left_pwm_fwd = 22;
 const int left_pwm_bwd = 23;
 
-const int PIN_SIDE_LIGHT_LED = 46;                  //Side light blinking led pin
 
 unsigned long lastMilli = 0;
 
 //--- Robot-specific constants ---
 const double radius = 0.0525;                   //Wheel radius, in m
 const double wheelbase = 0.42;               //Wheelbase, in m
-const double encoder_cpr = 20;               //Encoder ticks or counts per rotation
-const double speed_to_pwm_ratio = 0.00235;    //Ratio to convert speed (in m/s) to PWM value. It was obtained by plotting the wheel speed in relation to the PWM motor command (the value is the slope of the linear function).
-const double min_speed_cmd = 0.0482;          //(min_speed_cmd/speed_to_pwm_ratio) is the minimum command value needed for the motor to start moving. This value was obtained by plotting the wheel speed in relation to the PWM motor command (the value is the constant of the linear function).
+const double encoder_cpr = 168;               //Encoder ticks or counts per rotation
+const double speed_to_pwm_ratio = 0.00369;    //Ratio to convert speed (in m/s) to PWM value. It was obtained by plotting the wheel speed in relation to the PWM motor command (the value is the slope of the linear function).
+const double min_speed_cmd = 0.20295;          //(min_speed_cmd/speed_to_pwm_ratio) is the minimum command value needed for the motor to start moving. This value was obtained by plotting the wheel speed in relation to the PWM motor command (the value is the constant of the linear function).
 
 double speed_req = 0.1;                         //Desired linear speed for the robot, in m/s
 double angular_speed_req = 0;                 //Desired angular speed for the robot, in rad/s
@@ -51,14 +50,14 @@ double speed_req_right = 0;                   //Desired speed for right wheel in
 double speed_act_right = 0;                   //Actual speed for right wheel in m/s
 double speed_cmd_right = 0;                   //Command speed for right wheel in m/s 
                         
-const double max_speed = 1;                 //Max speed in m/s
+const double max_speed = 0.9;                 //Max speed in m/s
 
 int PWM_leftMotor = 0;                     //PWM command for left motor
 int PWM_rightMotor = 0;                    //PWM command for right motor 
                                                       
 // PID Parameters
-const double PID_left_param[] = { 0, 0, 0.1 }; //Respectively Kp, Ki and Kd for left motor PID
-const double PID_right_param[] = { 0, 0, 0.1 }; //Respectively Kp, Ki and Kd for right motor PID
+const double PID_left_param[] = { 0, 0, 0.05 }; //Respectively Kp, Ki and Kd for left motor PID
+const double PID_right_param[] = { 0, 0, 0.05 }; //Respectively Kp, Ki and Kd for right motor PID
 
 volatile float pos_left = 0;       //Left motor encoder position
 volatile float pos_right = 0;      //Right motor encoder position
@@ -158,7 +157,7 @@ void setup() {
   digitalWrite(PIN_ENCOD_A_MOTOR_RIGHT, HIGH);                // turn on pullup resistor
   digitalWrite(PIN_ENCOD_B_MOTOR_RIGHT, HIGH);
   //attachInterrupt(1,encoderRightMotor, RISING);
-  attachInterrupt(digitalPinToInterrupt(PIN_ENCOD_B_MOTOR_RIGHT),encoderLeftMotor, RISING);
+  attachInterrupt(digitalPinToInterrupt(PIN_ENCOD_B_MOTOR_RIGHT),encoderRightMotor, RISING);
 }
 
 //_________________________________________________________________________
@@ -169,7 +168,7 @@ void loop() {
   {                                                                           // enter timed loop
     lastMilli = millis();
        
-    if (abs(pos_left) < 5){                                                   //Avoid taking in account small disturbances
+    if (abs(pos_left) < 1){                                                   //Avoid taking in account small disturbances
       speed_act_left = 0;
     }
     else {
@@ -177,7 +176,7 @@ void loop() {
     }
         String LS = String(pos_left);
 
-    if (abs(pos_right) < 5){                                                  //Avoid taking in account small disturbances
+    if (abs(pos_right) < 1){                                                  //Avoid taking in account small disturbances
       speed_act_right = 0;
     }
     else {
@@ -209,18 +208,18 @@ void loop() {
     PWM_rightMotor = constrain(((speed_req_right+sgn(speed_req_right)*min_speed_cmd)/speed_to_pwm_ratio) + (speed_cmd_right/speed_to_pwm_ratio), -255, 255); // 
 
 
-    /*
+    
     // logging pid value for DEBUGGING ,  use rosserial_python serialnode.py port no 
-    String LS = String(PWM_leftMotor);
-    String RS = String(PWM_rightMotor);
+    String Lz = String(PWM_leftMotor);
+    String Rz = String(PWM_rightMotor);
 
-    String FS= "LM  " + LS + "     " + "RM  "+ RS;
+    String Fz= "LM  " + Lz + "     " + "RM  "+ Rz;
     
-    char FA[FS.length() + 1];
-    FS.toCharArray(FA,FS.length() + 1);
+    char FAc[Fz.length() + 1];
+    Fz.toCharArray(FAc,Fz.length() + 1);
     
-    nh.loginfo(FA);
-    */  
+    nh.loginfo(FAc);
+      
     
     if (noCommLoops >= noCommLoopMax) {                   //Stopping if too much time without command
         left_Stop();
@@ -284,8 +283,8 @@ void encoderLeftMotor() {
 
 //Right motor encoder counter
 void encoderRightMotor() {
-  if (digitalRead(PIN_ENCOD_A_MOTOR_RIGHT) == digitalRead(PIN_ENCOD_B_MOTOR_RIGHT)) pos_right++;
-  else pos_right--;
+  if (digitalRead(PIN_ENCOD_A_MOTOR_RIGHT) == digitalRead(PIN_ENCOD_B_MOTOR_RIGHT)) pos_right--;
+  else pos_right++;
 }
 
 template <typename T> int sgn(T val) {
