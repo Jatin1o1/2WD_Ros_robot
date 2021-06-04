@@ -27,6 +27,3 @@ base controller sketches for a 2WD robot using Ros using encoders, dc motor.
 > battery : 12V 7.2AH Battery .
 
 > PC: Currently using my laptop, later will be using raspberry pi/ Jetson Nano.
-
-## Issues: both the motors are not running smoothly, please try it on your robot and commit fixes to this repo as well.
-
