@@ -1,0 +1,32 @@
+<launch>
+				<!--  ************** Odometry ***************  -->
+	<arg name="gui" default="False" />
+	<param name="use_gui" value="$(arg gui)"/>
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find jbot_description)/urdf/jbot.xacro'"/>
+	
+	<!-- convert joint states to TF transforms for rviz, etc -->
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	
+	<!--   connect jbot(esp32/arduino ) via serial  	-->
+	<node name="serial_node" pkg="rosserial_python" type="serial_node.py">
+		<param name="port" value="/dev/ttyUSB0"/> 	</node>
+		
+	<node name="jbot_controller" pkg="jbot" type="jbot_controller">
+		<param name="publish_tf" value="true" />
+    		<param name="publish_rate" value="10.0" />
+    		<param name="linear_scale_positive" value="1.025" />
+    		<param name="linear_scale_negative" value="1.025" />
+    		<param name="angular_scale_positive" value="1.078" />
+    		<param name="angular_scale_negative" value="1.078" />
+		<param name="angular_scale_accel" value="0.0" />  </node>	
+	
+	<!--  ************** Sensors ***************  -->
+	<include file="$(find hls_lfcd_lds_driver)/launch/hlds_laser.launch" />
+	
+     <!--  ******************PUBLISHING TRANSFORMS ************  -->
+ <!-- node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link" args="0 0 0.05 0 0 0 /base_footprint /base_link  100"/ -->
+ <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.15 0 0.05 0 0 0  /base_link /laser  100"/>
+ 	
+</launch>
+
