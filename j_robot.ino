@@ -31,11 +31,13 @@ const int left_pwm_bwd =7;
 unsigned long lastMilli = 0;
 
 //--- Robot-specific constants ---
-const double radius = 0.05;                   //Wheel radius, in m
+const double radius = 0.0525;                   //Wheel radius, in m
 const double wheelbase = 0.42;               //Wheelbase, in m
-const double encoder_cpr = 20;               //Encoder ticks or counts per rotation
-const double speed_to_pwm_ratio = 0.0070;    //Ratio to convert speed (in m/s) to PWM value. It was obtained by plotting the wheel speed in relation to the PWM motor command (the value is the slope of the linear function).
-const double min_speed_cmd = 0.25;          //(min_speed_cmd/speed_to_pwm_ratio) is the minimum command value needed for the motor to start moving. This value was obtained by plotting the wheel speed in relation to the PWM motor command (the value is the constant of the linear function).
+const double encoder_cpr = 168;               //Encoder ticks or counts per rotation
+const double speed_to_pwm_ratio = 0.00369;    //Ratio to convert speed (in m/s) to PWM value. It was obtained by plotting the wheel speed in relation to the PWM motor command (the value is the slope of the linear function).
+const double min_speed_cmd = 0.20295;          //(min_speed_cmd/speed_to_pwm_ratio) is the minimum command value needed for the motor to start moving. This value was obtained by plotting the wheel speed in relation to the PWM motor command (the value is the constant of the linear function).
+const double min_speed_cmd = 0.2214;     // for 60 pwm
+
 
 double speed_req = 0;                         //Desired linear speed for the robot, in m/s
 double angular_speed_req = 0;                 //Desired angular speed for the robot, in rad/s
