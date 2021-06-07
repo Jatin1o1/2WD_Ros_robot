@@ -1,5 +1,5 @@
 # 2WD_ros_robot
-This code used here is from " NOX a House wandering robot  (https://create.arduino.cc/projecthub/robinb/nox-a-house-wandering-robot-ros-652315) " and have been updated to move without " Adafruit motor shield "
+This code used here is from " NOX a House wandering robot (https://github.com/RBinsonB/Nox_robot) posted at (https://create.arduino.cc/projecthub/robinb/nox-a-house-wandering-robot-ros-652315) " and have been updated to move on "motor controller BTS7960"  instead of  " Adafruit motor shield "
 
 base controller sketches for a 2WD robot using Ros using encoders, dc motor.
 
