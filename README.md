@@ -1,17 +1,18 @@
 # 2WD_ros_robot
-This code used here is from " NOX a House wandering robot (https://github.com/RBinsonB/Nox_robot) posted at (https://create.arduino.cc/projecthub/robinb/nox-a-house-wandering-robot-ros-652315) " and have been updated to move on "motor controller BTS7960"  instead of  " Adafruit motor shield "
+This code used here is from [ NOX a House wandering robot ](https://github.com/RBinsonB/Nox_robot "Git Repo") posted at (https://create.arduino.cc/projecthub/robinb/nox-a-house-wandering-robot-ros-652315) " and have been updated to move on "motor controller BTS7960"  instead of  " Adafruit motor shield "
 
 base controller sketches for a 2WD robot using Ros using encoders, dc motor.
+ [I'm an inline-style link with title](https://www.google.com "Google's Homepage")
 
 ## How to run
 
-> first upload the sketch on your development board (esp32/ Arduino mega), do hardware connections
+1. first upload the sketch on your development board (esp32/ Arduino mega), do hardware connections.
 
-> please type "sudo dmesg | grep tty " to find the comm port number of your board.
+2. please type "sudo dmesg | grep tty " to find the comm port number of your board.
 
-> please run "rosrun rosserial_python serial_node.py /dev/ttyUSB1 "  in one terminal.
+3. please run "rosrun rosserial_python serial_node.py /dev/ttyUSB1 "  in one terminal.
 
-> please run  " rosrun teleop_twist_keyboard teleop_twist_keyboard.py "  in another terminal to view wheels spinning.
+4. please run  " rosrun teleop_twist_keyboard teleop_twist_keyboard.py "  in another terminal to view wheels spinning.
 
 
 ## Hardware I used 
