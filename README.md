@@ -1,5 +1,5 @@
 # 2WD_ros_robot
-This code used here is from [ NOX a House wandering robot ](https://github.com/RBinsonB/Nox_robot "Git Repo") posted at (https://create.arduino.cc/projecthub/robinb/nox-a-house-wandering-robot-ros-652315) " and have been updated to move on "motor controller BTS7960"  instead of  " Adafruit motor shield "
+This code used here is from [ NOX a House wandering robot ](https://create.arduino.cc/projecthub/robinb/nox-a-house-wandering-robot-ros-652315 "Original post") [Git repo](https://github.com/RBinsonB/Nox_robot "Git Repo") " and have been updated to move on "motor controller BTS7960"  instead of  " Adafruit motor shield "
 
 base controller sketches for a 2WD robot using Ros using encoders, dc motor.
  [I'm an inline-style link with title](https://www.google.com "Google's Homepage")
@@ -17,14 +17,14 @@ base controller sketches for a 2WD robot using Ros using encoders, dc motor.
 
 ## Hardware I used 
 
-> motor driver : BTS7960  (43Amps).
+* motor driver : BTS7960  (43Amps).
 
-> Motors: custom gearbox using RS775 motors with 25:1 gear ratio.
+* Motors: custom gearbox using RS775 motors with 25:1 gear ratio.
 
-> encoder : currently using absolute encoder with 20 Counts per revolution (rotary encoder ky-040).
+* encoder : currently using absolute encoder with 20 Counts per revolution (rotary encoder ky-040).
 
-> volatge regulator : LM2596 DC DC Voltage Regulator with display.
+* volatge regulator : LM2596 DC DC Voltage Regulator with display.
 
-> battery : 12V 7.2AH Battery .
+* battery : 12V 7.2AH Battery .
 
-> PC: Currently using my laptop, later will be using raspberry pi/ Jetson Nano.
+* PC: Currently using my laptop, later will be using raspberry pi/ Jetson Nano.
